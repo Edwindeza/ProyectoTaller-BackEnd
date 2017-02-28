@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block cuerpo %}
+    <div class="col-md-8 col-md-offset-3">
+        {% if mensaje %}
+            <p>{{ mensaje }}</p>
+        {% endif %}
+        {% for usuariotramite in usuario_tramite %}
+            <li>{{ forloop.counter }}.-<a
+                href="{% url 'mi-tramite-detalle' usuariotramite.id %}">{{ usuariotramite.tramite|capfirst }}</a></li>
+        {% endfor %}
+    </div>
+{% endblock %}

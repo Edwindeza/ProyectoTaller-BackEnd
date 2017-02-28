@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block navegador %}
+
+    <nav class="col-xs-12">
+        <ul>
+            <li><a href="{% url 'index' %}">INICIO</a></li>
+            {% if not user.is_authenticated %}
+                <li><a href="{% url 'login' %}">INICIAR SESIÓN</a>
+                </li>
+            {% else %}
+                <li><a href="{% url 'logout' %}">SALIR</a></li>
+                <li><a href="{% url 'usuario-tramite' %}">ANEXAR BOUCHER</a></li>
+                <li><a href="{% url 'mis-tramites' %}">MIS TRÁMITES</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+{% endblock %}
+
+
+{% block cabezera %}
+
+{% endblock %}
+
+{% block cuerpo %}
+    <div class="col-md-8 col-md-offset-3">
+
+
+        <form action="{% url 'buscar_tramite' %} " method="get">
+            <label>Buscar Tamiter</label>
+            <input type="text" name="nombre">
+            <input type="submit" value="Buscar por nombre de trámite">
+        </form>
+        {% if mensaje %}
+            <p>{{ mensaje }}</p>
+        {% endif %}
+        {% for tramite in tramites %}
+            <li> {{ forloop.counter }}.-<a
+                    href="{% url 'detalle-tramite' tramite.id %}">{{ tramite.nombre|capfirst }}</a>
+            </li>
+        {% endfor %}
+    </div>
+{% endblock %}

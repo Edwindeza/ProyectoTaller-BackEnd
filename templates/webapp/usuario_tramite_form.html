@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block navegador %}
+
+    <nav class="col-xs-12">
+        <ul>
+            <li><a href="{% url 'index' %}">INICIO</a></li>
+            {% if not user.is_authenticated %}
+                <li><a href="{% url 'login' %}">INICIAR SESIÓN</a>
+                </li>
+            {% else %}
+                <li><a href="{% url 'logout' %}">SALIR</a></li>
+                <li><a href="{% url 'usuario-tramite' %}">ANEXAR BOUCHER</a></li>
+                <li><a href="{% url 'mis-tramites' %}">MIS TRÁMITES</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+{% endblock %}
+
+{% block cuerpo %}
+    <div class="col-xs-6 col-xs-offset-4">
+        <form action="{% url 'usuario-tramite' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Anexar Boucher</button>
+        </form>
+    </div>
+{% endblock %}
