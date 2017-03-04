@@ -3,7 +3,6 @@ from django.contrib.auth.models import PermissionsMixin, BaseUserManager, \
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.crypto import get_random_string
-from rest_framework.authtoken.models import Token
 
 
 def fut_code():
@@ -139,7 +138,7 @@ class Oficina(models.Model):
 
 
 class Tramite(models.Model):
-    jefe_tramite = models.ForeignKey(JefeDeTramite, related_name='jefe_tramite')
+    jefe_tramite = models.ForeignKey(JefeDeTramite, related_name='tramite')
     nombre = models.CharField(max_length=150)
     descripcion = models.CharField(max_length=150, null=True, blank=True)
     tipo = models.ForeignKey(TipoTramite, related_name='tramite')
@@ -166,10 +165,10 @@ class UsuarioTramite(models.Model):
     estado = models.CharField(max_length=25, choices=(
         ('NUEVO', 'NUEVO'), ('PERDIDO', 'PERDIDO'),
         ('EN MOVIMIENTO', 'EN MOVIMIENTO'),
-        ('FINALIZADO', 'FINALIZADO'),('CANCELADO','CANCELADO')),default='NUEVO', null=True, blank=True)
+        ('FINALIZADO', 'FINALIZADO'), ('CANCELADO', 'CANCELADO')), default='NUEVO', null=True, blank=True)
 
     def __str__(self):
         return u'{} -   {} {} {} - {}'.format(self.estado,
-                                         self.usuario.user.first_name,
-                                         self.usuario.user.last_name,
-                                         self.tramite,self.codigo)
+                                              self.usuario.user.first_name,
+                                              self.usuario.user.last_name,
+                                              self.tramite, self.codigo)

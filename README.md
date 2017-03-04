@@ -25,7 +25,9 @@ source nombre_entorno_virtual/bin/activate
 pip install -r ruta/al/proyecto/requirements.txt
 
 ## Correr el proyecto(en la carpeta raíz, donde se encuentra manage.py y el entorno virtual activado)
+
 python manage.py migrate
+
 python manage.py runserver
 
 

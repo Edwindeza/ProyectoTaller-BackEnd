@@ -1,4 +1,5 @@
 __author__ = 'klaatu'
+'''Archivo de configuracion para subir cambios al servidor, servidores'''
 from fabric.api import *
 from fabric.colors import green
 
@@ -16,8 +17,7 @@ def deploy():
     with cd("{}/tramites".format(home_path)):
         run("git pull origin master")
         run("{} && pip install -r requirements.txt".format(activate_env))
-        run("{} && {} collectstatic --noinput {}".format(activate_env, manage,
-                                                         settings))
+        run("{} && {} collectstatic --noinput {}".format(activate_env, manage,settings))
         run("{} && {} migrate {}".format(activate_env, manage, settings))
         sudo("service nginx restart", pty=False)
         sudo("service supervisor restart", pty=False)
