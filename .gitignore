@@ -3,5 +3,4 @@ media/
 staticfilesdir/
 .idea/
 static/bower_components
-tramites/settings/local.py
 *.pyc
